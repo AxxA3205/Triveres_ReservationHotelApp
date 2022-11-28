@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     });
 
     Route::post('booking', [BookingKamar::class, 'store']);
+    Route::get('booking', [BookingKamar::class, 'show']);
+    Route::resource('booking', BookingKamar::class);
     Route::post('logout', [AuthController::class, 'logout']);
 });
 

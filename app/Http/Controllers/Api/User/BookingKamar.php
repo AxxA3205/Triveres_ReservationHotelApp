@@ -9,6 +9,11 @@ use App\Models\Transaksi;
 
 class BookingKamar extends Controller
 {
+    public function index()
+    {
+        $booking = Transaksi::all();
+        return $booking;
+    }
     public function store(Request $request)
     {
         $user = auth()->user();
@@ -36,6 +41,22 @@ class BookingKamar extends Controller
             'message' => 'Anda bukan user',
             'data' => $booking
         ], 401);
+        }   
+    }
+
+    public function show($id) 
+    {
+        $booking = Transaksi::find($id);
+        if ($booking) {
+            return response()->json([
+                'status' => 200,
+                'data' => $booking
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'id atas' . $id . ' tidak ditemukan'
+            ], 404);
         }
     }
 }

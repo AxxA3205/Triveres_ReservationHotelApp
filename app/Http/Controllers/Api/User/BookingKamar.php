@@ -49,7 +49,26 @@ class BookingKamar extends Controller
         $booking = Transaksi::find($id);
         if ($booking) {
             return response()->json([
-                'status' => 200,
+                'status' => 'Success',
+                'message' => 'Pesanan berhasil ditampilkan',
+                'data' => $booking
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'id atas' . $id . ' tidak ditemukan'
+            ], 404);
+        }
+    }
+
+    public function destroy($id)
+    {
+        $booking = Transaksi::find($id);
+        $booking->delete();
+        if ($booking) {
+            return response()->json([
+                'status' => 'Success',
+                'message' => 'Pesanan berhasil dihapus',
                 'data' => $booking
             ], 200);
         } else {
